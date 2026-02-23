@@ -315,8 +315,11 @@ function filterPlants() {
     activeLetter = '';
     buildLetterBar();
   }
-  // Blur immediately on iOS to hide toolbar
-  input.blur();
+  // Hide iOS toolbar after 3 characters
+  if (searchQ.length >= 3) {
+    clearTimeout(window._kbTimer);
+    window._kbTimer = setTimeout(() => input.blur(), 400);
+  }
   renderGrid();
 }
 
