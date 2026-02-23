@@ -1,4 +1,4 @@
-const CACHE = 'veggi-tracker-v2';
+const CACHE = 'veggi-tracker-v3';
 
 self.addEventListener('install', e => {
   self.skipWaiting();
