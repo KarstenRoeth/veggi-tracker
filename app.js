@@ -278,8 +278,14 @@ function buildCatChips() {
 }
 
 function filterPlants() {
-  searchQ = document.getElementById('searchInput').value.toLowerCase();
+  const input = document.getElementById('searchInput');
+  searchQ = input.value.toLowerCase();
   renderGrid();
+  // Close keyboard on iOS after typing so results are visible
+  if (searchQ.length >= 1) {
+    clearTimeout(window._kbTimer);
+    window._kbTimer = setTimeout(() => input.blur(), 600);
+  }
 }
 
 function setCat(cat) {

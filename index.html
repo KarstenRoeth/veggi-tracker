@@ -486,14 +486,15 @@
   <div class="tab-panel active" id="tab-add">
     <div class="search-wrap">
       <span class="search-icon">🔍</span>
-      <input class="search-input" id="searchInput" type="text"
+      <input class="search-input" id="searchInput" type="search"
              placeholder="Suche (z.B. Banane, Brokkoli…)"
              autocomplete="off"
              autocorrect="off"
              autocapitalize="off"
+             autocomplete="off"
              spellcheck="false"
-             inputmode="search"
-             oninput="filterPlants()">
+             enterkeyhint="search"
+             oninput="filterPlants()" onkeydown="if(event.key==='Enter'){this.blur()}">
     </div>
     <div class="cat-chips" id="catChips"></div>
     <div class="plant-grid" id="plantGrid"></div>
