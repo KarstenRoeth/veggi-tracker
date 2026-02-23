@@ -1,18 +1,34 @@
-const CACHE = 'veggi-tracker-v1';
-const FILES = ['/', '/index.html', '/app.js', '/manifest.json'];
+const CACHE = 'veggi-tracker-v2';
 
 self.addEventListener('install', e => {
-  e.waitUntil(caches.open(CACHE).then(c => c.addAll(FILES)));
   self.skipWaiting();
 });
+
 self.addEventListener('activate', e => {
-  e.waitUntil(caches.keys().then(keys =>
-    Promise.all(keys.filter(k => k !== CACHE).map(k => caches.delete(k)))
-  ));
+  // Delete ALL old caches on activation
+  e.waitUntil(
+    caches.keys().then(keys =>
+      Promise.all(keys.map(k => caches.delete(k)))
+    )
+  );
   self.clients.claim();
 });
+
 self.addEventListener('fetch', e => {
+  if (e.request.method !== 'GET') return;
+
   e.respondWith(
-    caches.match(e.request).then(cached => cached || fetch(e.request))
+    // Always try network first
+    fetch(e.request)
+      .then(networkResponse => {
+        // Store fresh copy in cache for offline fallback
+        const clone = networkResponse.clone();
+        caches.open(CACHE).then(cache => cache.put(e.request, clone));
+        return networkResponse;
+      })
+      .catch(() => {
+        // Network failed (offline) → fall back to cache
+        return caches.match(e.request);
+      })
   );
 });
