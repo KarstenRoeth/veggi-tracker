@@ -55,6 +55,9 @@ const PLANTS = [
   { id:'okra',           name:'Okra',           emoji:'🌿', cat:'Gemüse' },
   { id:'edamame',        name:'Edamame',        emoji:'🫛', cat:'Gemüse' },
   { id:'maiskölbchen',   name:'Baby-Mais',      emoji:'🌽', cat:'Gemüse' },
+  { id:'navetsalat',     name:'Navetsalat',     emoji:'🥬', cat:'Gemüse' },
+  { id:'napa_kohl',      name:'Napa-Kohl',      emoji:'🥬', cat:'Gemüse' },
+  { id:'yam',            name:'Yams',           emoji:'🍠', cat:'Gemüse' },
   { id:'feldsalat',      name:'Feldsalat',      emoji:'🥬', cat:'Gemüse' },
   { id:'eisbergsalat',   name:'Eisbergsalat',   emoji:'🥬', cat:'Gemüse' },
   { id:'romanasalat',    name:'Romana-Salat',   emoji:'🥬', cat:'Gemüse' },
@@ -106,6 +109,8 @@ const PLANTS = [
   { id:'physalis',       name:'Physalis',       emoji:'🍊', cat:'Obst' },
   { id:'lychee',         name:'Lychee',         emoji:'🍈', cat:'Obst' },
   { id:'maracuja',       name:'Maracuja',       emoji:'🍊', cat:'Obst' },
+  { id:'ugli',           name:'Ugli-Frucht',    emoji:'🍊', cat:'Obst' },
+  { id:'yuzu',           name:'Yuzu',           emoji:'🍋', cat:'Obst' },
 
   // 🌾 Vollkorn & Getreide
   { id:'hafer',          name:'Haferflocken',   emoji:'🌾', cat:'Vollkorn' },
@@ -147,6 +152,8 @@ const PLANTS = [
   { id:'sesam',          name:'Sesam',          emoji:'⚪', cat:'Nüsse & Samen' },
   { id:'hanfsamen',      name:'Hanfsamen',      emoji:'🌿', cat:'Nüsse & Samen' },
   { id:'mohnsamen',      name:'Mohnsamen',      emoji:'🔵', cat:'Nüsse & Samen' },
+  { id:'nigellasamen',   name:'Nigellasamen',   emoji:'⚫', cat:'Nüsse & Samen' },
+  { id:'xanthan',        name:'Xanthan-Samen',  emoji:'🌾', cat:'Nüsse & Samen' },
 
   // 🌿 Kräuter & Gewürze
   { id:'petersilie',     name:'Petersilie',     emoji:'🌿', cat:'Kräuter & Gewürze' },
@@ -169,6 +176,8 @@ const PLANTS = [
   { id:'kaffee',         name:'Kaffee',         emoji:'☕', cat:'Kräuter & Gewürze' },
   { id:'kakao',          name:'Kakao (>70%)',   emoji:'🍫', cat:'Kräuter & Gewürze' },
   { id:'gruener_tee',    name:'Grüner Tee',     emoji:'🍵', cat:'Kräuter & Gewürze' },
+  { id:'nelke',          name:'Nelke',          emoji:'🌿', cat:'Kräuter & Gewürze' },
+  { id:'urwuerzsalz',    name:'Urwürzsalz-Kraut',emoji:'🌿', cat:'Kräuter & Gewürze' },
 ];
 
 const CATEGORIES = ['Alle', 'Gemüse', 'Obst', 'Vollkorn', 'Hülsenfrüchte', 'Nüsse & Samen', 'Kräuter & Gewürze'];
