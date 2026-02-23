@@ -428,6 +428,38 @@
       100% { opacity: 0; transform: translateY(120px) rotate(360deg) scale(0.5); }
     }
 
+    /* ── Letter bar ── */
+    .letter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-bottom: 12px;
+    }
+    .letter-btn {
+      min-width: 30px;
+      height: 30px;
+      padding: 0 6px;
+      border-radius: 8px;
+      border: none;
+      background: var(--card);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-muted);
+      cursor: pointer;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+      transition: all 0.12s;
+    }
+    .letter-btn.active {
+      background: var(--green-deep);
+      color: #fff;
+    }
+    .letter-btn.clear-btn {
+      background: var(--green-pale);
+      color: var(--green-deep);
+      font-size: 11px;
+      padding: 0 8px;
+    }
+
     /* no results */
     .no-results {
       text-align: center;
@@ -488,14 +520,13 @@
       <span class="search-icon">🔍</span>
       <input class="search-input" id="searchInput" type="search"
              placeholder="Suche (z.B. Banane, Brokkoli…)"
-             autocomplete="off"
-             autocorrect="off"
-             autocapitalize="off"
-             autocomplete="off"
-             spellcheck="false"
-             enterkeyhint="search"
-             oninput="filterPlants()" onkeydown="if(event.key==='Enter'){this.blur()}">
+             autocomplete="off" autocorrect="off" autocapitalize="off"
+             spellcheck="false" enterkeyhint="done"
+             oninput="filterPlants()"
+             onfocus="this.setAttribute('data-focused','1')"
+             onblur="this.removeAttribute('data-focused')">
     </div>
+    <div class="letter-bar" id="letterBar"></div>
     <div class="cat-chips" id="catChips"></div>
     <div class="plant-grid" id="plantGrid"></div>
   </div>

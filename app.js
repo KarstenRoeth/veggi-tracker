@@ -277,15 +277,47 @@ function buildCatChips() {
   `).join('');
 }
 
+// Active letter filter (separate from text search)
+let activeLetter = '';
+
+function buildLetterBar() {
+  // Collect first letters present in plant list
+  const letters = [...new Set(PLANTS.map(p => p.name[0].toUpperCase()))].sort();
+  const bar = document.getElementById('letterBar');
+  if (!bar) return;
+
+  let html = '';
+  if (activeLetter) {
+    html += `<button class="letter-btn clear-btn" onclick="setLetter('')">✕ Alle</button>`;
+  }
+  html += letters.map(l =>
+    `<button class="letter-btn ${l === activeLetter ? 'active' : ''}" onclick="setLetter('${l}')">${l}</button>`
+  ).join('');
+  bar.innerHTML = html;
+}
+
+function setLetter(letter) {
+  activeLetter = letter;
+  // Also clear text search when using letter buttons
+  if (letter) {
+    document.getElementById('searchInput').value = '';
+    searchQ = '';
+  }
+  buildLetterBar();
+  renderGrid();
+}
+
 function filterPlants() {
   const input = document.getElementById('searchInput');
   searchQ = input.value.toLowerCase();
-  renderGrid();
-  // Close keyboard on iOS after typing so results are visible
-  if (searchQ.length >= 1) {
-    clearTimeout(window._kbTimer);
-    window._kbTimer = setTimeout(() => input.blur(), 600);
+  // Clear letter filter when typing
+  if (searchQ.length > 0 && activeLetter) {
+    activeLetter = '';
+    buildLetterBar();
   }
+  // Blur immediately on iOS to hide toolbar
+  input.blur();
+  renderGrid();
 }
 
 function setCat(cat) {
@@ -297,9 +329,10 @@ function setCat(cat) {
 function renderGrid() {
   const wk = currentWeek();
   let plants = PLANTS.filter(p => {
-    const matchCat  = activeCat === 'Alle' || p.cat === activeCat;
-    const matchQ    = p.name.toLowerCase().includes(searchQ);
-    return matchCat && matchQ;
+    const matchCat    = activeCat === 'Alle' || p.cat === activeCat;
+    const matchQ      = p.name.toLowerCase().includes(searchQ);
+    const matchLetter = !activeLetter || p.name[0].toUpperCase() === activeLetter;
+    return matchCat && matchQ && matchLetter;
   });
 
   // Sort: not eaten first, then alpha
@@ -562,5 +595,6 @@ if ('serviceWorker' in navigator) {
 // ── Init ─────────────────────────────────────────────────────────────────────
 loadState();
 buildCatChips();
+buildLetterBar();
 renderGrid();
 updateHeader();
